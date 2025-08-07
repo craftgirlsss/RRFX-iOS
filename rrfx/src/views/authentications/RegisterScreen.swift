@@ -1,10 +1,3 @@
-//
-//  RegisterScreen.swift
-//  rrfx
-//
-//  Created by XFCE on 07/08/25.
-//
-
 import SwiftUI
 
 struct RegisterScreen: View {
@@ -68,7 +61,7 @@ struct RegisterScreen: View {
                         Text("Email Address")
                             .font(.headline)
                             .padding(.bottom, 5)
-                        ValidatedInputTextField(
+                        EmailTextField(
                             placeholder: "name@email.com",
                             text: $emailAddress,
                             iconName: "envelope",
@@ -93,14 +86,37 @@ struct RegisterScreen: View {
                         Text("Password")
                             .font(.headline)
                             .padding(.bottom, 5)
-                        SecureInputView(placeholder: "Create Password", text: $password, iconName: "lock", isVisible: $isPasswordVisible)
-                            .padding(.bottom, 10.0)
+
+                        PasswordTextField(
+                            placeholder: "Create Password",
+                            password: $password,
+                            isVisible: $isPasswordVisible
+                        )
+                        .padding(.bottom, 10)
                         
+                        if !password.isEmpty {
+                            VStack(alignment: .leading, spacing: 4) {
+                                PasswordRuleItem(text: "Minimal 8 karakter", passed: password.count >= 8)
+                                PasswordRuleItem(text: "Huruf kapital", passed: password.range(of: "[A-Z]", options: .regularExpression) != nil)
+                                PasswordRuleItem(text: "Huruf kecil", passed: password.range(of: "[a-z]", options: .regularExpression) != nil)
+                                PasswordRuleItem(text: "Angka", passed: password.range(of: "[0-9]", options: .regularExpression) != nil)
+                                PasswordRuleItem(text: "Simbol", passed: password.range(of: "[^A-Za-z0-9]", options: .regularExpression) != nil)
+                            }
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                            .padding(.bottom, 10.0)
+                        }
+
                         Text("Repeat Password")
                             .font(.headline)
                             .padding(.bottom, 5)
-                        SecureInputView(placeholder: "Repeat Password", text: $repeatPassword, iconName: "lock", isVisible: $isRepeatPasswordVisible)
-                            .padding(.bottom, 10.0)
+
+                        PasswordTextField(
+                            placeholder: "Repeat Password",
+                            password: $repeatPassword,
+                            isVisible: $isRepeatPasswordVisible
+                        )
+                        .padding(.bottom, 10)
                     }
                     
                     // MARK: - Agreement Checkbox

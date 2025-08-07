@@ -1,19 +1,34 @@
 import SwiftUI
 
-struct EmailTextField: View {
+struct PasswordTextField: View {
     let placeholder: String
-    @Binding var text: String
-    let iconName: String
-    var isValid: Bool? = nil // optional validasi
+    @Binding var password: String
+    @Binding var isVisible: Bool
+    
+    var isValid: Bool? {
+        if password.isEmpty { return nil }
+        return isValidPassword(password)
+    }
     
     var body: some View {
         HStack {
-            Image(systemName: iconName)
+            Image(systemName: "lock")
                 .foregroundColor(.gray)
             
-            TextField(placeholder, text: $text)
-                .autocapitalization(.none)
-                .keyboardType(.emailAddress)
+            if isVisible {
+                TextField(placeholder, text: $password)
+            } else {
+                SecureField(placeholder, text: $password)
+            }
+            
+            Button(action: {
+                withAnimation {
+                    isVisible.toggle()
+                }
+            }) {
+                Image(systemName: isVisible ? "eye.slash" : "eye")
+                    .foregroundColor(.gray)
+            }
             
             if let valid = isValid {
                 withAnimation {
@@ -30,5 +45,6 @@ struct EmailTextField: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.gray.opacity(0.3), lineWidth: 1)
         )
+        
     }
 }
