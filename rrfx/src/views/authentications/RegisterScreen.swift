@@ -15,6 +15,25 @@ struct RegisterScreen: View {
     @State private var password: String = ""
     @State private var repeatPassword: String = ""
     @State private var isAgreed: Bool = false
+    @State private var isOTPSent: Bool = false
+    
+    
+    var isFormValid: Bool {
+        return !fullName.isEmpty &&
+           !emailAddress.isEmpty &&
+           !phoneNumber.isEmpty &&
+           !otpCode.isEmpty &&
+           !password.isEmpty &&
+           !repeatPassword.isEmpty &&
+           isAgreed
+    }
+    
+    var isEmailValid: Bool? {
+        if emailAddress.isEmpty {
+            return nil // Belum divalidasi
+        }
+        return isValidEmail(emailAddress)
+    }
     
     // Properti state untuk mengontrol visibilitas password.
     @State private var isPasswordVisible: Bool = false
@@ -49,20 +68,27 @@ struct RegisterScreen: View {
                         Text("Email Address")
                             .font(.headline)
                             .padding(.bottom, 5)
-                        InputTextField(placeholder: "name@email.com", text: $emailAddress, iconName: "envelope")
-                            .padding(.bottom, 10.0)
+                        ValidatedInputTextField(
+                            placeholder: "name@email.com",
+                            text: $emailAddress,
+                            iconName: "envelope",
+                            isValid: isEmailValid
+                        )
+                        .padding(.bottom, 10.0)
                         
                         Text("Phone Number")
                             .font(.headline)
                             .padding(.bottom, 5)
-                        PhoneInputView(phoneNumber: $phoneNumber)
+                        PhoneInputView(phoneNumber: $phoneNumber, isOTPSent: $isOTPSent)
                             .padding(.bottom, 10.0)
 
-                        Text("OTP Code")
-                            .font(.headline)
-                            .padding(.bottom, 5)
-                        OTPInputView(otpCode: $otpCode)
-                            .padding(.bottom, 10.0)
+                        if isOTPSent {
+                            Text("OTP Code")
+                                .font(.headline)
+                                .padding(.bottom, 5)
+                            OTPInputView(otpCode: $otpCode)
+                                .padding(.bottom, 10.0)
+                        }
                         
                         Text("Password")
                             .font(.headline)
@@ -104,14 +130,15 @@ struct RegisterScreen: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.gray)
+                            .background(isFormValid ? AppColors.primaryColor : Color.gray)
                             .cornerRadius(10)
                     }
+                    .disabled(!isFormValid)
                 }
                 .padding()
                 .navigationBarHidden(true) // Sembunyikan navigasi default
             }
-            }
+        }
     }
 }
 
@@ -140,6 +167,7 @@ struct InputTextField: View {
 // Komponen untuk input nomor telepon dengan tombol OTP
 struct PhoneInputView: View {
     @Binding var phoneNumber: String
+    @Binding var isOTPSent: Bool
     
     var body: some View {
         HStack(spacing: 8) {
@@ -158,7 +186,7 @@ struct PhoneInputView: View {
             )
             
             Button(action: {
-                // TODO: Aksi untuk mengirim OTP
+                isOTPSent = !isOTPSent
             }) {
                 Text("Send OTP")
                     .font(.subheadline)
