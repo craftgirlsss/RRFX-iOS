@@ -21,83 +21,97 @@ struct RegisterScreen: View {
     @State private var isRepeatPasswordVisible: Bool = false
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 4) {
-                // MARK: - Top Navigation
-                Text("Welcome")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(AppColors.secondaryColor)
-                Text("back!")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.black)
+            ScrollView{
+                VStack(alignment: .leading, spacing: 0) {
+                    // MARK: - Top Navigation
+                    Text("Welcome")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(AppColors.secondaryColor)
+                    Text("back!")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.black)
 
-                Text("Lihat pergerakan harga pasar global secara langsung, dengan chart interaktif dan analisis teknikal lengkap.")
-                    .font(.body)
-                    .foregroundColor(Color.gray)
-                    .padding(.bottom, 20.0)
+                    Text("Lihat pergerakan harga pasar global secara langsung, dengan chart interaktif dan analisis teknikal lengkap.")
+                        .font(.body)
+                        .foregroundColor(Color.gray)
+                        .padding(.bottom, 20.0)
 
-                // MARK: - Input Fields
-                Group {
-                    Text("Full Name")
-                        .font(.headline)
-                    InputTextField(placeholder: "Full Name", text: $fullName, iconName: "person")
+                    // MARK: - Input Fields
+                    Group {
+                        Text("Full Name")
+                            .font(.headline)
+                            .padding(.bottom, 5)
+                        InputTextField(placeholder: "Full Name", text: $fullName, iconName: "person")
+                            .padding(.bottom, 10.0)
 
-                    Text("Email Address")
-                        .font(.headline)
-                    InputTextField(placeholder: "name@email.com", text: $emailAddress, iconName: "envelope")
-                    
-                    Text("Phone Number")
-                        .font(.headline)
-                    PhoneInputView(phoneNumber: $phoneNumber)
+                        Text("Email Address")
+                            .font(.headline)
+                            .padding(.bottom, 5)
+                        InputTextField(placeholder: "name@email.com", text: $emailAddress, iconName: "envelope")
+                            .padding(.bottom, 10.0)
+                        
+                        Text("Phone Number")
+                            .font(.headline)
+                            .padding(.bottom, 5)
+                        PhoneInputView(phoneNumber: $phoneNumber)
+                            .padding(.bottom, 10.0)
 
-                    Text("OTP Code")
-                        .font(.headline)
-                    OTPInputView(otpCode: $otpCode)
-                    
-                    Text("Password")
-                        .font(.headline)
-                    SecureInputView(placeholder: "Create Password", text: $password, iconName: "lock", isVisible: $isPasswordVisible)
-                    
-                    Text("Repeat Password")
-                        .font(.headline)
-                    SecureInputView(placeholder: "Repeat Password", text: $repeatPassword, iconName: "lock", isVisible: $isRepeatPasswordVisible)
-                }
-                
-                // MARK: - Agreement Checkbox
-                HStack(alignment: .top) {
-                    Button(action: {
-                        isAgreed.toggle()
-                    }) {
-                        Image(systemName: isAgreed ? "checkmark.square.fill" : "square")
-                            .foregroundColor(isAgreed ? .blue : .gray)
+                        Text("OTP Code")
+                            .font(.headline)
+                            .padding(.bottom, 5)
+                        OTPInputView(otpCode: $otpCode)
+                            .padding(.bottom, 10.0)
+                        
+                        Text("Password")
+                            .font(.headline)
+                            .padding(.bottom, 5)
+                        SecureInputView(placeholder: "Create Password", text: $password, iconName: "lock", isVisible: $isPasswordVisible)
+                            .padding(.bottom, 10.0)
+                        
+                        Text("Repeat Password")
+                            .font(.headline)
+                            .padding(.bottom, 5)
+                        SecureInputView(placeholder: "Repeat Password", text: $repeatPassword, iconName: "lock", isVisible: $isRepeatPasswordVisible)
+                            .padding(.bottom, 10.0)
                     }
                     
-                    Text("Dengan mendaftar, Anda menyetujui Kebijakan Privasi dan Syarat & Ketentuan aplikasi RRFX.")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                .padding(.top, 10)
+                    // MARK: - Agreement Checkbox
+                    HStack(alignment: .top) {
+                        Button(action: {
+                            isAgreed.toggle()
+                        }) {
+                            Image(systemName: isAgreed ? "checkmark.square.fill" : "square")
+                                .foregroundColor(isAgreed ? .blue : .gray)
+                        }
+                        
+                        Text("Dengan mendaftar, Anda menyetujui Kebijakan Privasi dan Syarat & Ketentuan aplikasi RRFX.")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.top, 10)
 
-                Spacer()
-                
-                // MARK: - Next Button
-                Button(action: {
-                    // TODO: Aksi untuk tombol 'Next' di sini
-                    print("Next button tapped!")
-                }) {
-                    Text("Next")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.gray)
-                        .cornerRadius(10)
+                    Spacer()
+                    
+                    // MARK: - Next Button
+                    Button(action: {
+                        // TODO: Aksi untuk tombol 'Next' di sini
+                        print("Next button tapped!")
+                    }) {
+                        Text("Next")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.gray)
+                            .cornerRadius(10)
+                    }
                 }
+                .padding()
+                .navigationBarHidden(true) // Sembunyikan navigasi default
             }
-            .padding()
-            .navigationBarHidden(true) // Sembunyikan navigasi default
-        }
+            }
     }
 }
 

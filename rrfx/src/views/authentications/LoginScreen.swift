@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LoginScreen: View {
-    @Binding var isShowingLogin: Bool
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             // Tombol Kembali
@@ -74,7 +73,6 @@ struct LoginScreen: View {
 
             // Tombol "Sign in" dan "Continue with Google"
             Button(action: {
-                isShowingLogin = false
             }) {
                 Text("Sign in")
                     .font(.headline)

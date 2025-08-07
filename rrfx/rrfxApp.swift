@@ -1,32 +1,29 @@
-//
-//  rrfxApp.swift
-//  rrfx
-//
-//  Created by XFCE on 06/08/25.
-//
-
 import SwiftUI
-import SwiftData
 
 @main
 struct rrfxApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    init() {
+        setupNavigationBarAppearance()
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                IntroductionScreen()
+            }
+            .tint(AppColors.secondaryColor)
         }
-        .modelContainer(sharedModelContainer)
+    }
+
+    func setupNavigationBarAppearance() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.secondaryColor]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.secondaryColor]
+
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
     }
 }

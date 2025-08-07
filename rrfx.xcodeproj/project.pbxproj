@@ -24,7 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		41C13A872E4376DC003EB901 /* rrfx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rrfx.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		41C13A872E4376DC003EB901 /* RRFX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RRFX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C13A982E4376DD003EB901 /* rrfxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rrfxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41C13AA22E4376DD003EB901 /* rrfxUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rrfxUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,7 +98,7 @@
 		41C13A882E4376DC003EB901 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				41C13A872E4376DC003EB901 /* rrfx.app */,
+				41C13A872E4376DC003EB901 /* RRFX.app */,
 				41C13A982E4376DD003EB901 /* rrfxTests.xctest */,
 				41C13AA22E4376DD003EB901 /* rrfxUITests.xctest */,
 			);
@@ -127,7 +127,7 @@
 			packageProductDependencies = (
 			);
 			productName = rrfx;
-			productReference = 41C13A872E4376DC003EB901 /* rrfx.app */;
+			productReference = 41C13A872E4376DC003EB901 /* RRFX.app */;
 			productType = "com.apple.product-type.application";
 		};
 		41C13A972E4376DD003EB901 /* rrfxTests */ = {
@@ -305,7 +305,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.rrfx;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RRFX;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -335,7 +335,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ios.rrfx;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RRFX;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
