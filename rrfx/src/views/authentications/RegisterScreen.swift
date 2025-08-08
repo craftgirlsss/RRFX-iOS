@@ -208,7 +208,7 @@ struct PhoneInputView: View {
                     .font(.subheadline)
                     .foregroundColor(.white)
                     .padding()
-                    .background(AppColors.primaryColor)
+                    .background(AppColors.secondaryColor)
                     .cornerRadius(10)
             }
         }
